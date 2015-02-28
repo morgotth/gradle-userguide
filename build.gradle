@@ -1,0 +1,40 @@
+defaultTasks 'hello', 'ls'
+
+// Note:                << { ... }
+// is a shortcut for    { doLast { ... } }
+task hello << {
+    println 'Hello world!'
+}
+
+hello.doFirst {
+    ext.myProperty = new Date()
+    println " === BEGINNING at $ext.myProperty ==="
+}
+
+hello.doLast { // "<<" is an alias for "doLast"
+    println " === ENDING from $ext.myProperty ==="
+}
+
+// Groovy example
+task upper(dependsOn: hello) << {
+    String someString = 'mY_nAmE'
+    println "Original: " + someString
+    println "Upper case: " + someString.toUpperCase()
+
+    4.times { print "ok ?! " }
+    println ""
+}
+
+// Using a method in a task
+File[] ls(String dir) {
+    file(dir).listFiles({file -> file.exists() } as FileFilter).sort()
+}
+task ls << {
+    ls('.').each { File f ->
+        println f.name
+    }
+}
+
+gradle.taskGraph.whenReady {taskGraph ->
+    println ">> End of configuration phase, start execution phase"
+}
