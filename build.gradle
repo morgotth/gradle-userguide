@@ -6,6 +6,11 @@ task hello << {
     println 'Hello world!'
 }
 
+hello {
+    description 'Hello world task'
+    group 'main'
+}
+
 hello.doFirst {
     ext.myProperty = new Date()
     println " === BEGINNING at $ext.myProperty ==="
@@ -25,6 +30,11 @@ task upper(dependsOn: hello) << {
     println ""
 }
 
+upper {
+    description 'Groovy usage example'
+    group 'main'
+}
+
 // Using a method in a task
 File[] ls(String dir) {
     file(dir).listFiles({file -> file.exists() } as FileFilter).sort()
@@ -33,6 +43,11 @@ task ls << {
     ls('.').each { File f ->
         println f.name
     }
+}
+
+ls {
+    description 'List files in current directory'
+    group 'main'
 }
 
 gradle.taskGraph.whenReady {taskGraph ->

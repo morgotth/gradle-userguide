@@ -45,3 +45,17 @@ Select where task is located with **-p**:
 ```bash
 gradle -p simplex test
 ```
+
+## Task description
+
+A task can have a description and a group.
+
+To see them, run:
+
+```bash
+# All tasks
+gradle -p tasks [--all]
+
+# A specific task
+gradle -q help --task upper
+```
