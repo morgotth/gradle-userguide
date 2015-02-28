@@ -33,3 +33,15 @@ gradle :simplex:check
 
 See [documentation](http://gradle.org/docs/current/userguide/tutorial_java_projects.html).
 
+## Tips
+
+Task name abbreviation examples:
+
+- di -> dist
+- cT -> compileTest
+
+Select where task is located with **-p**:
+
+```bash
+gradle -p simplex test
+```
